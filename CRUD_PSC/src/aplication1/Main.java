@@ -45,8 +45,11 @@ public class Main {
                         }
                         break;
                     case 5://Atualizar livro
+                        livros = LivroDao.getLivro();
+                        atualizarLivro(livros);
                         break;
                     case 6://Deletar livro
+                        excluirLivro();
                         break; 
                     case 7://Mostrar biblioteca
                         livros = LivroDao.getLivro();
@@ -71,8 +74,8 @@ public class Main {
 
         "\n4 - Cadastrar novo livro✔"+
         "\n5 - Atualizar algum livro"+
-        "\n6 - Deletar livro"+
-        "\n7 - 📚Mostrar coleção✔\n"+
+        "\n6 - Deletar livro✔"+
+        "\n7 - Mostrar coleção✔\n"+
         "\n0 - Para sair";
             
         int opcao = -1;
@@ -143,14 +146,81 @@ public class Main {
         Livro novoLivro = new Livro(0,titulo, autor, intAno, genSelecionado);
         LivroDao.cadastrar(novoLivro);
     }
+/****************Só falta essa classe abaixo para acabar**************************** */ 
+    public static void atualizarLivro(List<Livro> livros){//5 Método para atualizar livros
+
+        String texto = "Escolha um livro para atualizar";
+        for (Livro l : livros) {
+            texto += "\n"+l.id+" - "+l.titulo;
+        }
+        texto += "\nDigite o id que corresponde";
+
+        int idLivro = 0;
+        try {
+            idLivro = Integer.parseInt(JOptionPane.showInputDialog(texto));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "ID inválido. Operação cancelada.");
+            return;
+        }
+        Livro livSelecionado = null;
+        // Encontrar o livro com o ID especificado
+        for (Livro l : livros) {
+            if(l.id == idLivro){
+                livSelecionado = l;
+            }
+        }
+           
+        if (livSelecionado == null) {
+            JOptionPane.showMessageDialog(null, "Livro não encontrado. Operação cancelada.");
+            return;
+        }
+    
+            // Obter novos valores do usuário
+            String titulo = JOptionPane.showInputDialog("Qual é o título do livro?", livSelecionado.titulo);
+            String autor = JOptionPane.showInputDialog("Qual o nome do autor deste livro?", livSelecionado.autor);
+        
+            int anoLancamento = livSelecionado.lancamento; // valor padrão
+            try {
+                String lanDigitado = JOptionPane.showInputDialog("Em que ano ele foi lançado?", String.valueOf(livSelecionado.lancamento));
+                if (!lanDigitado.isEmpty()) {
+                    anoLancamento = Integer.parseInt(lanDigitado);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ano de lançamento inválido. Mantendo o valor original.");
+            }
+        
+            // Atualizar os atributos do livro selecionado
+            livSelecionado.titulo = titulo;
+            livSelecionado.autor = autor;
+            livSelecionado.lancamento = anoLancamento;
+        
+            // Chamar o método de atualização no DAO
+            LivroDao.editar(livSelecionado);
+        
+            JOptionPane.showMessageDialog(null, "Livro atualizado com sucesso!");
+        }
+/************************************************************************************* */
+    public static void excluirLivro(){//6 Método para excluir um livro
+        List<Livro> livros = LivroDao.getLivro();
+        String texto = "Escolha um livro para deletar";
+        for (Livro l : livros) {
+            texto += "\n"+l.id+" - "+l.titulo;
+        }
+        texto += "\nDigite o id correspondente";
+        String idDigitado = JOptionPane.showInputDialog(texto);
+        if(!idDigitado.isEmpty()){
+            int idLivro = Integer.valueOf(idDigitado);
+            LivroDao.excluirL(idLivro);
+        }
+    }
 
     public static void listarLivros(List<Livro>livros){ //7 Método para listar os livros
         if (livros.size()<=0) {
             JOptionPane.showMessageDialog(null,"Lista vázia");
         } else {
-            String texto = "Todos os 7livros\n";
+            String texto = "Todos os livros\n";
             for (Livro l : livros) {
-                texto += "\n"+l.id+" - "+l.titulo+
+                texto +=    "\n"+l.id+" - "+l.titulo+
                             " - "+l.autor+" - "+l.genero.nomeGe+
                             " - "+l.lancamento+"\n----------------------------\n";
             }

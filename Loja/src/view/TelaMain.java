@@ -249,11 +249,7 @@ public class TelaMain {
 	}
 
 	public static void cadastrarCliente(List<Cidade> municipios){
-		// String idDigitado = JOptionPane.showInputDialog("Digite o ID da Cliente: ");
-		// int id = 0;
-		// if( ! idDigitado.isEmpty() ){
-		// 	id = Integer.valueOf( idDigitado );
-		// }
+		
 		String nome = JOptionPane.showInputDialog("Digite o nome da Cliente: ");
 		String end = JOptionPane.showInputDialog("Digite o endereço: ");
 		

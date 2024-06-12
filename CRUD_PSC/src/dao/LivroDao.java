@@ -41,6 +41,7 @@ public class LivroDao {
 			ps.setString(2, livro.autor );
 			ps.setInt(3, livro.lancamento);
 			ps.setInt(4, livro.genero.id);
+			ps.setInt(5, livro.id);
 			ps.execute();
 			factory.Conexao.fecharConn( conn );
 		} catch (SQLException e) {
@@ -48,8 +49,8 @@ public class LivroDao {
 		}
 	}
 
-	public static void excluir( int idLivro ){
-		String sql = "DELETE FROM cliente WHERE id = ? ";	
+	public static void excluirL( int idLivro ){
+		String sql = "DELETE FROM livros WHERE id = ? ";	
 		PreparedStatement ps = null;
 		try {
 			Connection conn = Conexao.getConexao();
