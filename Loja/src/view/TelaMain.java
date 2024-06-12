@@ -364,8 +364,6 @@ public class TelaMain {
 			}
 		}
 		pedido.addProduto( prodSelecionado );
-
-		
 	} 
 
 	public static void vizualizarPedido(List<Pedido> pedidos){
@@ -409,7 +407,5 @@ public class TelaMain {
 			int idCidade = Integer.valueOf( idDiditado );
 			CidadeDAO.excluir(idCidade);
 		}
-		
 	}
-
 }

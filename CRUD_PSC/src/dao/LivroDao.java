@@ -15,8 +15,9 @@ import model.Livro;
 public class LivroDao {
 
 	public static void cadastrar( Livro livro){
-		String sql = "INSERT INTO livros (titulo, autor, lancamento, id_genero) VALUES ( ? , ? , ?, ? )";	
+		String sql = "INSERT INTO livros (titulo, autor, lancamento, id_genero) VALUES (?,?,?,?)";	
 		PreparedStatement ps = null;
+
 		try {
 			Connection conn = factory.Conexao.getConexao();
 			ps = conn.prepareStatement(sql); 
@@ -34,6 +35,7 @@ public class LivroDao {
 	public static void editar(Livro livro){
 		String sql = "UPDATE livros SET titulo =  ? , autor = ? , lancamento = ?, id_genero =? WHERE id = ? ";	
 		PreparedStatement ps = null;
+
 		try {
 			Connection conn = factory.Conexao.getConexao();
 			ps = conn.prepareStatement(sql);
@@ -49,11 +51,11 @@ public class LivroDao {
 		}
 	}
 
-	public static void excluirL( int idLivro ){
+	public static void excluirLiv( int idLivro ){
 		String sql = "DELETE FROM livros WHERE id = ? ";	
 		PreparedStatement ps = null;
 		try {
-			Connection conn = Conexao.getConexao();
+			Connection conn = factory.Conexao.getConexao();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idLivro );
 			ps.execute();

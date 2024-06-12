@@ -45,8 +45,8 @@ public class GeneroDao {
 
     public static List<Genero>getGenero(){
         List<Genero> lista = new ArrayList<Genero>();
-
-        String sql = "SELECT * FROM genero ORDER BY nome DESC";
+        
+        String sql = "SELECT * FROM genero ORDER BY id";
         PreparedStatement ps= null;
 
         try {
