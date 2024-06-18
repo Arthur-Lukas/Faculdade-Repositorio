@@ -62,8 +62,8 @@ public class Main {
                 }
             }while(opcao!=0);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Opção inválida, voltando para o menu");
-            mostrarMenu();
+            JOptionPane.showMessageDialog(null,"Opção inválida!");
+            return;
         }
     }
 
@@ -93,6 +93,7 @@ public class Main {
         String nome = JOptionPane.showInputDialog("Digite o nome do genero: ");
         if(!nome.isEmpty()) //Se não digitar nada, não vai fazer nada
             GeneroDao.cadastrar(nome);// Associando a classe feita no Dao para cadastrar no banco de dados
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }
 
     public static void excluirGenero(){//2 Método para excluir um genero
@@ -105,9 +106,32 @@ public class Main {
 
         texto += "\n\nDigite o id que corresponde ao gênero";
         String idDigitado = JOptionPane.showInputDialog(texto);
-        if(!idDigitado.isEmpty()){
-            int idGenero = Integer.valueOf(idDigitado);
-            GeneroDao.excluir(idGenero);
+
+        String input = JOptionPane.showInputDialog(null, "Tem certeza que deseja deletar este gênero? (s/n)");
+        
+        // Verifica se a entrada é válida
+        if (input != null && input.length() == 1) {
+            char ch = input.charAt(0);
+
+            // Verifica o caractere e responde adequadamente
+            if (ch == 's' || ch == 'S') {
+                try {
+                    if(!idDigitado.isEmpty()){
+                        int idGenero = Integer.valueOf(idDigitado);
+                        GeneroDao.excluir(idGenero);
+                        JOptionPane.showMessageDialog(null, "Deletado com sucesso!");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null,"Este genero não pode ser deletado, delete os livros que estão associados a este gênero antes!");
+                    excluirLivro();
+                }
+            } else if (ch == 'n' || ch == 'N') {
+                return;
+            } else {
+                JOptionPane.showMessageDialog(null, "Você digitou outro caractere.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Entrada inválida. Por favor, digite apenas um caractere.");
         }
     }
     
@@ -153,6 +177,7 @@ public class Main {
 
         Livro novoLivro = new Livro(0,titulo, autor, intAno, genSelecionado);
         LivroDao.cadastrar(novoLivro);
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }
 
     public static void atualizarLivro(List<Livro>livros){//5 Método para atualizar livros
@@ -218,9 +243,31 @@ public class Main {
 
         texto += "\n\nDigite o id correspondente";
         String idDigitado = JOptionPane.showInputDialog(texto);
-        if(!idDigitado.isEmpty()){
-            int idLivro = Integer.valueOf(idDigitado);
-            LivroDao.excluirLiv(idLivro);
+
+        String input = JOptionPane.showInputDialog(null, "Tem certeza que gostaria de deletar este livro? (s/n)");
+
+        if (input != null) {
+            
+            boolean booleanValue;
+
+            // Verifica se a entrada é 'true' ou 'false'
+            if (input.equalsIgnoreCase("S")||input.equalsIgnoreCase("s")) {
+                
+                booleanValue = true;
+
+                if(!idDigitado.isEmpty()){
+                    int idLivro = Integer.valueOf(idDigitado);
+                    LivroDao.excluirLiv(idLivro);
+                    JOptionPane.showMessageDialog(null,"Deletado com sucesso!");
+                }
+
+            } else if (input.equalsIgnoreCase("n")||input.equalsIgnoreCase("N")) {
+                booleanValue = false;
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Entrada inválida. Por favor, digite 's' ou 'n'.");
+                return;
+            }
         }
     }
 

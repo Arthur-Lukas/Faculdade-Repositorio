@@ -47,13 +47,4 @@ public class Livro {
         this.lancamento = lancamento;
         this.genero = genero;
     } 
-
-    @Override
-    public String toString(){
-        return "Livro id: "+this.id+
-                "\nTitulo: "+this.titulo+
-                "\nAutor: "+this.autor+
-                "\nData de lançamento: "+this.lancamento+
-                "\nGenero: "+this.genero.nomeGe+"\n";
-    }
 }

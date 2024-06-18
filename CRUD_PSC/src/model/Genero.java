@@ -12,8 +12,4 @@ public class Genero {
         this.id = id;
         this.nomeGe = nomeGe;
     }
-    @Override
-    public String toString(){
-        return "Gênero: "+this.nomeGe;
-    }
 }
