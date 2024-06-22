@@ -9,13 +9,13 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import model.Ebook;
 import model.Genero;
-import model.Livro;
 
-public class LivroDao {
+public class EbookDao {
 
-	public static void cadastrar( Livro livro){
-		String sql = "INSERT INTO livros (titulo, autor, lancamento, id_genero) VALUES (?,?,?,?)";	
+	public static void cadastrarEbook( Ebook livro){
+		String sql = "INSERT INTO ebooks (titulo, autor, lancamento, id_genero, paginas) VALUES (?,?,?,?,?)";	
 		PreparedStatement ps = null;
 
 		try {
@@ -25,6 +25,7 @@ public class LivroDao {
 			ps.setString(2, livro.autor );
 			ps.setInt(3, livro.lancamento );
 			ps.setInt(4, livro.genero.getId() );
+			ps.setInt(5, livro.paginas);
 			ps.execute();
 			//factory.Conexao.fecharConn( conn );
 		} catch (SQLException e) {
@@ -32,8 +33,8 @@ public class LivroDao {
 		}
 	}
 
-	public static void editar(Livro livro){
-		String sql = "UPDATE livros SET titulo =  ? , autor = ? , lancamento = ?, id_genero =? WHERE id = ? ";	
+	public static void editarEbook(Ebook livro){
+		String sql = "UPDATE ebooks SET titulo =  ? , autor = ? , lancamento = ?, id_genero =?, paginas =? WHERE id = ? ";	
 		PreparedStatement ps = null;
 
 		try {
@@ -44,6 +45,7 @@ public class LivroDao {
 			ps.setInt(3, livro.lancamento);
 			ps.setInt(4, livro.genero.getId());
 			ps.setInt(5, livro.id);
+			ps.setInt(6, livro.paginas);
 			ps.execute();
 			factory.Conexao.fecharConn( conn );
 		} catch (SQLException e) {
@@ -51,8 +53,8 @@ public class LivroDao {
 		}
 	}
 
-	public static void excluirLiv( int idLivro ){
-		String sql = "DELETE FROM livros WHERE id = ? ";	
+	public static void excluirEbook( int idLivro ){
+		String sql = "DELETE FROM ebooks WHERE id = ? ";	
 		PreparedStatement ps = null;
 		try {
 			Connection conn = factory.Conexao.getConexao();
@@ -65,10 +67,10 @@ public class LivroDao {
 		}
 	}
 
-	public static List<Livro> getLivro(){
-		List<Livro> lista = new ArrayList<Livro>();
-		String sql = 	" SELECT l.id, l.titulo, l.autor, l.lancamento, g.id, g.nome " + 
-                        " FROM livros l" + 
+	public static List<Ebook> getEbook(){
+		List<Ebook> lista = new ArrayList<Ebook>();
+		String sql = 	" SELECT l.id, l.titulo, l.autor, l.lancamento, g.id, g.nome, l.paginas " + 
+                        " FROM ebooks l" + 
                         " INNER JOIN genero g ON g.id = l.id_genero" + 
                         " ORDER BY l.id ";	
 		PreparedStatement ps = null;
@@ -82,12 +84,13 @@ public class LivroDao {
 					gen.setId(rs.getInt( 5 ));
 					gen.setNome(rs.getString( 6 ));
 
-					Livro liv = new Livro();
+					Ebook liv = new Ebook();
 					liv.id = rs.getInt(1);
 					liv.titulo = rs.getString(2);
 					liv.autor = rs.getString(3);
 					liv.lancamento = rs.getInt(4);
 					liv.genero = gen;
+					liv.paginas = rs.getInt(6);
 					lista.add(liv);
 				}
 			}			

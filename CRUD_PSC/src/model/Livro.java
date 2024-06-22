@@ -8,11 +8,6 @@ public class Livro {
 
     public Livro(){
         this.titulo = "Sem titulo";
-        System.out.println("Título do livro: "+this.titulo);
-    }
-
-    public Livro(String titulo){
-        this.titulo = titulo;
     }
 
     public Livro(String titulo, String autor){
