@@ -58,8 +58,8 @@ public class GeneroDao {
             if (rs!=null) {
                 while(rs.next()){
                     Genero ge = new Genero();
-                    ge.id = rs.getInt(1);
-                    ge.nomeGe = rs.getString(2);
+                    ge.setId( rs.getInt(1));
+                    ge.setNome( rs.getString(2));
                     lista.add(ge);
                 }
             }

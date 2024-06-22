@@ -24,7 +24,7 @@ public class LivroDao {
 			ps.setString(1, livro.titulo );
 			ps.setString(2, livro.autor );
 			ps.setInt(3, livro.lancamento );
-			ps.setInt(4, livro.genero.id );
+			ps.setInt(4, livro.genero.getId() );
 			ps.execute();
 			//factory.Conexao.fecharConn( conn );
 		} catch (SQLException e) {
@@ -42,7 +42,7 @@ public class LivroDao {
 			ps.setString(1, livro.titulo );
 			ps.setString(2, livro.autor );
 			ps.setInt(3, livro.lancamento);
-			ps.setInt(4, livro.genero.id);
+			ps.setInt(4, livro.genero.getId());
 			ps.setInt(5, livro.id);
 			ps.execute();
 			factory.Conexao.fecharConn( conn );
@@ -79,8 +79,8 @@ public class LivroDao {
 			if( rs != null ){
 				while ( rs.next() ) {
 					Genero gen = new Genero();
-					gen.id = rs.getInt( 5 );
-					gen.nomeGe = rs.getString( 6 );
+					gen.setId(rs.getInt( 5 ));
+					gen.setNome(rs.getString( 6 ));
 
 					Livro liv = new Livro();
 					liv.id = rs.getInt(1);

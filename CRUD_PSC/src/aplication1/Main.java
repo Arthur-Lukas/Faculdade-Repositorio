@@ -1,3 +1,14 @@
+/***************************************************************************************************************
+ * 
+Neste projeto que eu dediquei muito tempo amor e carinho, tentei implementar tudo aquilo que eu aprendi nas aulas de programação do primeiro semestre da faculdade 
+com o professor Adalto Selau. Ester projeto é um CRUD que implementei com o paradigma de POO na linguagem Java junto com a linguagem Mysql para a criação de um banco de dados.
+Temos classes e suas características.
+  - Aqui estão variáveis do tipo: int, String, char e boolean
+  - E aqui eu implementei alguns métodos como: switch case, do while, try catch, if else, for, list, array list
+  - Há também características privadas que só são acessiveis através dos métodos 'get' e modificadas através de 'set'
+
+ ***************************************************************************************************************/
+
 package aplication1;
 
 import java.util.List;
@@ -101,7 +112,7 @@ public class Main {
 
         String texto = "Lista de gêneros\n";
         for (Genero g : generos) {
-            texto += "\n"+g.id+" - "+g.nomeGe;
+            texto += "\n"+g.getId()+" - "+g.getNome();
         }
 
         texto += "\n\nDigite o id que corresponde ao gênero";
@@ -142,7 +153,7 @@ public class Main {
         } else {
             String texto = "Todos os generos\n";
             for (Genero g : generos) {
-                texto += "\n"+g.id+" - "+g.nomeGe;
+                texto += "\n"+g.getId()+" - "+g.getNome();
             }
             JOptionPane.showMessageDialog(null,texto);
         }
@@ -163,14 +174,14 @@ public class Main {
         
         String texto = "Gêneros de livros";
         for (Genero g : generos) {
-            texto += "\n"+g.id+" - "+g.nomeGe;
+            texto += "\n"+g.getId()+" - "+g.getNome();
         }
         
         texto += "\nDigite o id que corresponde ao gênero";
         int idGenero = Integer.valueOf(JOptionPane.showInputDialog(texto));
         Genero genSelecionado = null;
         for (Genero g : generos) {
-            if(g.id == idGenero){
+            if(g.getId() == idGenero){
                 genSelecionado = g;
             }
         }
@@ -279,7 +290,7 @@ public class Main {
             String texto = "Todos os livros";
             for (Livro l : livros) {
                 texto +=    "\n\n" +l.id+" - "+"Titúlo: "+l.titulo+
-                            "\n      Autor: "+l.autor+"\n      Gênero: "+l.genero.nomeGe+
+                            "\n      Autor: "+l.autor+"\n      Gênero: "+l.genero.getNome()+
                             "\n      Ano de lançamento: "+l.lancamento;
             }
             JOptionPane.showMessageDialog(null,texto);
