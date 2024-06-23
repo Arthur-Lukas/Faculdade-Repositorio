@@ -2,12 +2,12 @@
  
 Neste projeto que eu dediquei muito tempo amor e carinho, tentei implementar tudo aquilo que eu aprendi nas aulas de programação do primeiro semestre da faculdade 
 com o professor Adalto Selau. Ester projeto é um CRUD que implementei com o paradigma de POO na linguagem Java junto com a linguagem Mysql para a criação de um banco de dados.
-Temos classes e suas características.
+Temos classes, as suas características e muitos métodos para brincar com eles.
   - Aqui estão variáveis do tipo: int, String, char e boolean
   - E aqui eu implementei alguns métodos como: switch case, do while, try catch, if else, for, list, array list
   - Há também características privadas que só são acessiveis através dos métodos 'get' e modificadas através de 'set'
-  - Herança: métods 'extends', 'super', 
-  - Polimorfismo: pois quando declara os atributos das sub classes junto com os da classe mãe e executando, está fazendo a mesma coisa porem dando resultados diferentes
+  - Herança: Tenho duas classes (livro fisico e ebook) que herdam de outra classe mãe (livro) utilizando 'extends' e 'super'
+  - Polimorfismo: pois declarando os atributos das sub classes junto com os da classe mãe e executando, está fazendo a mesma coisa porem dando resultados diferentes
 
  ***************************************************************************************************************/
 
@@ -64,7 +64,7 @@ public class Main {
                     case 5:
                         ebooks = EbookDao.getEbook();
                         livrosfisicos = LivFisDao.getLivro();
-                        atualizarLivro(livrosfisicos,ebooks);
+                        atualizarLivro(livrosfisicos,ebooks, generos);
                         break;
                     case 6:
                         ebooks = EbookDao.getEbook();
@@ -76,7 +76,7 @@ public class Main {
                         listarLivros(livrosfisicos);
                         break;
                     case 8:
-                        ebooks = EbookDao.getEbook();// Implementar funcionalidade para listar ebooks
+                        ebooks = EbookDao.getEbook();
                         listarEbooks(ebooks);
                         break;
                     case 0:
@@ -87,7 +87,7 @@ public class Main {
                 }
                 
             } catch (NumberFormatException e) {// Essa exceção é capturada quando o usuário digita algo que não pode ser convertido para um número inteiro
-                JOptionPane.showMessageDialog(null, "Erro: digite apenas números inteiros para selecionar uma opção.");
+                JOptionPane.showMessageDialog(null, e.toString());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro ao executar a operação. Tente novamente.");
             }
@@ -95,16 +95,17 @@ public class Main {
     }
     
     public static int mostrarMenu() {
+
         String texto = "Minha biblioteca\nOlá! Seja bem vindo a sua biblioteca online pessoal\nSelecione uma opção\n" +
-            "\n1 - Cadastrar novo gênero" +
-            "\n2 - Deletar gênero" +
-            "\n3 - Ver os generos que tem\n" +
-            "\n4 - Cadastrar livros" +
-            "\n5 - Atualizar livro" +
-            "\n6 - Deletar algum livro" +
-            "\n7 - Listar livros físicos" +
-            "\n8 - Listar ebooks\n" +
-            "\n0 - Para sair";
+                        "\n1 - Cadastrar novo gênero" +
+                        "\n2 - Deletar gênero" +
+                        "\n3 - Ver os generos que tem\n" +
+                        "\n4 - Cadastrar livros" +
+                        "\n5 - Atualizar livro" +
+                        "\n6 - Deletar algum livro" +
+                        "\n7 - Listar livros físicos" +
+                        "\n8 - Listar ebooks\n" +
+                        "\n0 - Para sair";
         
         int opcao = -1;
         String opcaoDigitada = JOptionPane.showInputDialog(texto);
@@ -116,10 +117,18 @@ public class Main {
     }
 
     public static void cadastrarGenero(){ //1 Método para cadastrar gêneros de livros
+        List <Genero> generos = GeneroDao.getGenero();
+
+        String texto = "Gêneros cadastrados\n";
+        for (Genero g : generos) {
+            texto += "\n"+g.getId()+" - "+g.getNome();
+        }
+
+        texto += "\n\nCadastre um novo genero";
         
-        String nome = JOptionPane.showInputDialog("Digite o nome do genero: ");
-        if(!nome.isEmpty()) //Se não digitar nada, não vai fazer nada
-            GeneroDao.cadastrar(nome);// Associando a classe feita no Dao para cadastrar no banco de dados
+        texto = JOptionPane.showInputDialog(texto);
+        if(!texto.isEmpty()) //Se não digitar nada, não vai fazer nada
+            GeneroDao.cadastrar(texto);// Associando a classe feita no Dao para cadastrar no banco de dados
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
     }
 
@@ -140,11 +149,9 @@ public class Main {
 
         String input = JOptionPane.showInputDialog(null, "Tem certeza que deseja deletar este gênero? (s/n)");
         
-        // Verifica se a entrada é válida
         if (input != null && input.length() == 1) {
             char ch = input.charAt(0);
 
-            // Verifica o caractere e responde adequadamente
             if (ch == 's' || ch == 'S') {
                 try {
                     if(!idDigitado.isEmpty()){
@@ -181,12 +188,11 @@ public class Main {
 
     public static void cadastrarLivro(List<Genero>generos){//4 Método para cadastrar livros
 
-        String escolha = JOptionPane.showInputDialog("Qual tipo de livro você deseja cadastrar?\n\nFísico ou digital?");
+        String escolha = JOptionPane.showInputDialog("Qual tipo de livro você deseja cadastrar?\n\nFísico ou digital?\n\n");
         
         if(escolha.equalsIgnoreCase("fisico")){
 
             String titulo = JOptionPane.showInputDialog("Qual é o título livro?");
-
             String autor = JOptionPane.showInputDialog("Qual o nome do autor deste livro?");
     
             int intAno = 0; 
@@ -196,12 +202,12 @@ public class Main {
                 intAno = Integer.valueOf(lanDigitado);
             }
             
-            String texto = "Gêneros de livros";
+            String texto = "Escolha um genero para o seu livro";
             for (Genero g : generos) {
                 texto += "\n"+g.getId()+" - "+g.getNome();
             }
             
-            texto += "\nDigite o id que corresponde ao gênero";
+            texto += "\nDigite o id que correspondente";
             int idGenero = Integer.valueOf(JOptionPane.showInputDialog(texto));
             Genero genSelecionado = null;
             for (Genero g : generos) {
@@ -219,7 +225,6 @@ public class Main {
         }else if(escolha.equalsIgnoreCase("digital")){
 
             String titulo = JOptionPane.showInputDialog("Qual é o título livro?");
-
             String autor = JOptionPane.showInputDialog("Qual o nome do autor?");
     
             int intAno = 0; 
@@ -254,19 +259,19 @@ public class Main {
         }
     }
     
-    public static void atualizarLivro(List<LivroFisico>livrosfisicos, List<Ebook>ebooks){//5 Método para atualizar livros
+    public static void atualizarLivro(List<LivroFisico>livrosfisicos, List<Ebook>ebooks, List<Genero>generos){//5 Método para atualizar livros
 
-        String escolha = JOptionPane.showInputDialog("Qual tipo de livro você deseja cadastrar?\nFísico ou digital?");
+        String escolha = JOptionPane.showInputDialog("Qual tipo de livro você deseja cadastrar?\n\nFísico ou digital?\n\n");
 
         try{
             if(escolha.equalsIgnoreCase("fisico")){
 
-                String texto = "Escolha um livro para atualizar";
+                String texto = "Escolha um livro para atualizar\n";
                 for (LivroFisico l : livrosfisicos) {
                     texto += "\n"+l.id+" - "+l.titulo;
                 }
 
-                texto += "\nDigite o id que corresponde";
+                texto += "\n\nDigite o id que corresponde";
 
                 int idLivro = 0;
                 try {
@@ -277,7 +282,7 @@ public class Main {
                 }
 
                 LivroFisico livSelecionado = null;
-                // Encontrar o livro com o ID especificado
+
                 for (LivroFisico l : livrosfisicos) {
                     if(l.id == idLivro){
                         livSelecionado = l;
@@ -303,11 +308,26 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Ano de lançamento inválido. Mantendo o valor original.");
                 }
 
+                String trocar = "Escolha outro genero";
+                for (Genero g : generos) {
+                    trocar += "\n"+g.getId()+" - "+g.getNome();
+                }
+                
+                trocar += "\nDigite o id que corresponde ao gênero";
+                int idGenero = Integer.valueOf(JOptionPane.showInputDialog(trocar));
+                Genero genSelecionado = null;
+                for (Genero g : generos) {
+                    if(g.getId() == idGenero){
+                        genSelecionado = g;
+                    }
+                }
+
                 Double preco = Double.parseDouble(JOptionPane.showInputDialog("Informe o novo valor"));
                 // Atualizar os atributos do livro selecionado
                 livSelecionado.titulo = titulo;
                 livSelecionado.autor = autor;
                 livSelecionado.lancamento = anoLancamento;
+                livSelecionado.genero = genSelecionado;
                 livSelecionado.preco = preco;
                 // Chamar o método de atualização no DAO
                 LivFisDao.editar(livSelecionado);
@@ -350,7 +370,7 @@ public class Main {
                 int anoLancamento = livSelecionado.lancamento; // valor padrão
 
                 try {
-                String lanDigitado = JOptionPane.showInputDialog("E qual a nova data de lançamento?", String.valueOf(livSelecionado.lancamento));
+                    String lanDigitado = JOptionPane.showInputDialog("E qual a nova data de lançamento?", String.valueOf(livSelecionado.lancamento));
                     if (!lanDigitado.isEmpty()) {
                         anoLancamento = Integer.parseInt(lanDigitado);
                     }
@@ -358,11 +378,26 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Ano de lançamento inválido. Mantendo o valor original.");
                 }
 
+                String trocar = "Escolha outro genero";
+                for (Genero g : generos) {
+                    trocar += "\n"+g.getId()+" - "+g.getNome();
+                }
+                
+                trocar += "\nDigite o id que corresponde ao gênero";
+                int idGenero = Integer.valueOf(JOptionPane.showInputDialog(trocar));
+                Genero genSelecionado = null;
+                for (Genero g : generos) {
+                    if(g.getId() == idGenero){
+                        genSelecionado = g;
+                    }
+                }
+
                 int paginas = Integer.valueOf(JOptionPane.showInputDialog("Informe o novo valor"));
                 // Atualizar os atributos do livro selecionado
                 livSelecionado.titulo = titulo;
                 livSelecionado.autor = autor;
                 livSelecionado.lancamento = anoLancamento;
+                livSelecionado.genero = genSelecionado;
                 livSelecionado.paginas = paginas;
                 // Chamar o método de atualização no DAO
                 EbookDao.editarEbook(livSelecionado);
@@ -383,7 +418,7 @@ public class Main {
         List<LivroFisico> livrosfisicos = LivFisDao.getLivro();
         List<Ebook> ebooks = EbookDao.getEbook();
 
-        String escolha = JOptionPane.showInputDialog("Qual tipo de livro você deseja deletar?\nFísico ou digital?");
+        String escolha = JOptionPane.showInputDialog("Qual tipo de livro você deseja deletar?\n\nFísico ou digital?\n\n");
 
         if(escolha.equalsIgnoreCase("fisico")){
 
@@ -468,12 +503,14 @@ public class Main {
         if (livrosfisicos.size()<=0) {
             JOptionPane.showMessageDialog(null,"Lista vázia");
         }else{
-            String texto = "Todos os livros";
+            String texto = "Todos os livros fisicos";
             for (LivroFisico l : livrosfisicos) {
                 texto +=    "\n\n" +l.id+" - "+"Titúlo: "+l.titulo+
-                            "\n      Autor: "+l.autor+"\n      Gênero: "+l.genero.getNome()+
+                            "\n      Autor: "+l.autor+
+                            "\n      Gênero: "+l.genero.getNome()+
                             "\n      Ano de lançamento: "+l.lancamento+
-                            "\n      Preço: R$"+l.preco;
+                            "\n      Preço: R$"+l.preco+
+                            "\n      Peso: Kg "+LivroFisico.getPeso();
             }
             JOptionPane.showMessageDialog(null,texto);
         }
@@ -489,12 +526,14 @@ public class Main {
         if (ebooks.size()<=0) {
             JOptionPane.showMessageDialog(null,"Lista vázia");
         }else{
-            String texto = "Todos os livros";
+            String texto = "Todos os ebooks";
             for (Ebook l : ebooks) {
                 texto +=    "\n\n" +l.id+" - "+"Titúlo: "+l.titulo+
-                            "\n      Autor: "+l.autor+"\n      Gênero: "+l.genero.getNome()+
+                            "\n      Autor: "+l.autor+
+                            "\n      Gênero: "+l.genero.getNome()+
                             "\n      Ano de lançamento: "+l.lancamento+
-                            "\n      N° de pág: "+l.paginas;
+                            "\n      N° de pág: "+l.paginas+
+                            "\n      Formato do arquivo: "+Ebook.getFormat();
             }
             JOptionPane.showMessageDialog(null,texto);
         }

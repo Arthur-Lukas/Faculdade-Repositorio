@@ -14,11 +14,6 @@ public class Ebook extends Livro{
         this.paginas = paginas;
     }
 
-    public Ebook(int id, String titulo, String autor, int lancamento, Genero genero, int paginas, String format){
-        super(id, titulo, autor, lancamento, genero);
-        this.paginas = paginas;
-    }
-
     public static String getFormat(){
         return format;
     }

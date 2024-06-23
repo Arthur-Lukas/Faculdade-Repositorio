@@ -24,7 +24,7 @@ public class LivFisDao {
 			ps.setString(1, livro.titulo );
 			ps.setString(2, livro.autor );
 			ps.setInt(3, livro.lancamento );
-			ps.setInt(4, livro.genero.getId() );
+			ps.setInt(4, livro.genero.getId());
 			ps.setDouble(5, livro.preco);
 			ps.execute();
 			//factory.Conexao.fecharConn( conn );
@@ -44,8 +44,8 @@ public class LivFisDao {
 			ps.setString(2, livro.autor );
 			ps.setInt(3, livro.lancamento);
 			ps.setInt(4, livro.genero.getId());
-			ps.setInt(5, livro.id);
 			ps.setDouble(5, livro.preco);
+			ps.setInt(6, livro.id);
 			ps.execute();
 			factory.Conexao.fecharConn( conn );
 		} catch (SQLException e) {
@@ -90,7 +90,7 @@ public class LivFisDao {
 					liv.titulo = rs.getString(2);
 					liv.autor = rs.getString(3);
 					liv.lancamento = rs.getInt(4);
-					liv.preco = rs.getDouble(6);
+					liv.preco = rs.getDouble(5);
 					liv.genero = gen;
 					lista.add(liv);
 				}

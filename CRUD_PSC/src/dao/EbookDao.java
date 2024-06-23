@@ -44,8 +44,8 @@ public class EbookDao {
 			ps.setString(2, livro.autor );
 			ps.setInt(3, livro.lancamento);
 			ps.setInt(4, livro.genero.getId());
-			ps.setInt(5, livro.id);
-			ps.setInt(6, livro.paginas);
+			ps.setInt(5, livro.paginas);
+			ps.setInt(6, livro.id);
 			ps.execute();
 			factory.Conexao.fecharConn( conn );
 		} catch (SQLException e) {
@@ -69,7 +69,7 @@ public class EbookDao {
 
 	public static List<Ebook> getEbook(){
 		List<Ebook> lista = new ArrayList<Ebook>();
-		String sql = 	" SELECT l.id, l.titulo, l.autor, l.lancamento, g.id, g.nome, l.paginas " + 
+		String sql = 	" SELECT l.id, l.titulo, l.autor, l.lancamento, l.paginas, g.id, g.nome " + 
                         " FROM ebooks l" + 
                         " INNER JOIN genero g ON g.id = l.id_genero" + 
                         " ORDER BY l.id ";	
@@ -89,8 +89,8 @@ public class EbookDao {
 					liv.titulo = rs.getString(2);
 					liv.autor = rs.getString(3);
 					liv.lancamento = rs.getInt(4);
-					liv.genero = gen;
 					liv.paginas = rs.getInt(6);
+					liv.genero = gen;
 					lista.add(liv);
 				}
 			}			

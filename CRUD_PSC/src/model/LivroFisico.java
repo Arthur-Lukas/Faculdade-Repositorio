@@ -3,7 +3,7 @@ package model; //Erda as características da classe livro
 public class LivroFisico extends Livro{
 
     public double preco;
-    private static double peso = 700.28; //este atributo pertence a classe e não aos objetos que serão criados a partir da classe, então não poderá ser alterado fora desta classe
+    private static double peso = 0.700; //este atributo pertence a classe e não aos objetos que serão criados a partir da classe, então não poderá ser alterado fora desta classe
 
     public LivroFisico(){ //Como este método não retorna nada, vai puxar o método construtor do livro que não recebe parametro
         super(); //E mesmo se encima tiver parametros, o super continuará a pegar o método construtor sem parametro
