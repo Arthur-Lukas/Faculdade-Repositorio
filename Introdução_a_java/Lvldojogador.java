@@ -1,6 +1,6 @@
 import java.util.Scanner;  
 
-public class SwitchStringExample {    
+public class Lvldojogador {    
     public static void main(String[] args) {    
         //Declaring String variable  
         Scanner entra = new Scanner(System.in);

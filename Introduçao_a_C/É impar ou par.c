@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-int main()
-{
+int main(){
+    
     int opcao;
     printf("---MENU--------\n");
     printf("1 - Imprimir meu nome \n");
@@ -20,6 +20,5 @@ int main()
         default:
             printf("Opção inválida");
     }
-    
     return 0;
 }

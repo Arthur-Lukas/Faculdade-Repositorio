@@ -16,8 +16,7 @@ package Introdução_a_java;
 
 import java.util.Scanner;
 
-public class Maquina_de_lanches
-{
+public class Maquina_de_lanches{
     public static void main(String[]args)
     {
         Scanner ler=new Scanner(System.in);

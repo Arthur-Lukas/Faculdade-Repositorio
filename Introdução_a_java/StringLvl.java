@@ -1,6 +1,6 @@
 //Java Program to demonstrate the use of Java Switch  
 //statement with String  
-public class SwitchStringExample {    
+public class StringLvl {    
 public static void main(String[] args) {    
     //Declaring String variable  
     String levelString="Nada mal";  //Você escolhe o level não pelos números mas sim pelo que for escrito

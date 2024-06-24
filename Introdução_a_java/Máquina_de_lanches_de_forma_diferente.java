@@ -13,11 +13,8 @@ package Introdução_a_java;
  
  */
 
-
-
 import javax.swing.JOptionPane;
-public class Máquina_de_lanches_de_forma_diferente 
- {
+public class Máquina_de_lanches_de_forma_diferente {
 
 public static void main (String [] args){
     

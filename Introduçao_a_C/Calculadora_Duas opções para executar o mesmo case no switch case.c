@@ -11,9 +11,8 @@ Mostrar o resultado da operação realizada.
 
 #include <stdio.h>
 #include <stdbool.h>
-int main() //Todo programa para ser executado tem que ter isso aq//
+int main(){ //Todo programa para ser executado tem que ter isso aq//
 
-{ 
     //Aqui está declarando as variáveis que iremos trabalhar apenas, tipo separando os ingredientes//
     char opcao; //char: caractére
     int n1, n2; //int: para mostrar apenas números inteiros
@@ -64,6 +63,5 @@ int main() //Todo programa para ser executado tem que ter isso aq//
     if(imprimir) {
         printf("%.2f\n", result);
     }
-    
     return 0; 
 }
