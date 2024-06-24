@@ -5,8 +5,7 @@ leia uma temperatura dada na escala celsius (c) e imprima o equivalente em fahre
 
 #include <stdio.h>
 
-float main()
-{
+float main(){
     float C;
     float F = 9/5 * C+ 32;
     printf("Digite a temperatura em celsius: ");
