@@ -493,12 +493,7 @@ public class Main {
         }
     }
 
-    public static void listarLivros(List<LivroFisico>livrosfisicos){ //7 Método para listar os livros
-
-        if(livrosfisicos.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Lista vázia");
-            return;
-        }
+    public static void listarLivros(List<LivroFisico>livrosfisicos){ //7 Método para listar os livros fisicos
 
         if (livrosfisicos.size()<=0) {
             JOptionPane.showMessageDialog(null,"Lista vázia");
@@ -516,7 +511,7 @@ public class Main {
         }
     }
 
-    public static void listarEbooks(List<Ebook>ebooks){ //7 Método para listar os livros
+    public static void listarEbooks(List<Ebook>ebooks){ //8 Método para listar os ebooks
 
         if(ebooks.isEmpty()){
             JOptionPane.showMessageDialog(null, "Lista vázia!");
