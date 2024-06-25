@@ -9,6 +9,8 @@ Temos classes, as suas características e muitos métodos para brincar com eles.
   - Herança: Tenho duas classes (livro fisico e ebook) que herdam de outra classe mãe (livro) utilizando 'extends' e 'super'
   - Polimorfismo: pois declarando os atributos das sub classes junto com os da classe mãe e executando, está fazendo a mesma coisa porem dando resultados diferentes
 
+  E eu dedico esse trabalho aos meus pais Suely e André, que sob muito sol, fizeram com que eu chegasse aqui, na sombra
+
  ***************************************************************************************************************/
 
 package aplication;
