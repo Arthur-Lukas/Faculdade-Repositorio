@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Launch Main",
+            "mainClass": "aplication.Main",
+            "classPaths": [
+                "ProjetoRuim/bin",
+                "ProjetoRuim/resources/mysql-connector-j-8.4.0.jar"
+            ]
+        }
+    ]
+}
