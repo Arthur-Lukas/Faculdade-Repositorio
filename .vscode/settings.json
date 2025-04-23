@@ -1,0 +1,12 @@
+{
+    "java.project.sourcePaths": [
+        "CRUD_PSC\\src",
+        "Loja\\src"
+    ],
+    "java.project.referencedLibraries": [
+        "CRUD_PSC\\resources\\mysql-connector-j-8.4.0.jar"
+    ],
+    "files.associations": {
+        "stdio.h": "c"
+    }
+}
